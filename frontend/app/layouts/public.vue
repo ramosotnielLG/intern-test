@@ -63,7 +63,7 @@
               <li><NuxtLink to="/services" class="hover:text-white transition-colors hover:underline underline-offset-4">Our Services</NuxtLink></li>
               <li><NuxtLink to="/about" class="hover:text-white transition-colors hover:underline underline-offset-4">About Us</NuxtLink></li>
               <li><NuxtLink to="/contact" class="hover:text-white transition-colors hover:underline underline-offset-4">Contact Support</NuxtLink></li>
-              <li><a href="#" class="hover:text-white transition-colors hover:underline underline-offset-4">Privacy Policy</a></li>
+              <li><a href="https://music.apple.com/id/album/obzen/1882049235" target="_blank" class="hover:text-white transition-colors hover:underline underline-offset-4">Privacy Policy</a></li>
             </ul>
           </div>
 

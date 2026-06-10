@@ -7,9 +7,11 @@
         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent flex flex-col justify-center items-center text-white text-center px-6">
           <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-sm">The Perfect Design</h1>
           <p class="mt-4 text-lg md:text-xl text-gray-200 max-w-xl leading-relaxed">From logo design to website designs, we are ready.</p>
+          <NuxtLink to="/contact">
           <button class="mt-8 bg-rose-800 hover:bg-rose-900 text-white px-8 py-3.5 rounded-xl font-bold transition-all duration-300 hover:shadow-lg hover:shadow-rose-700/30 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer">
             Purchase MegaPack
           </button>
+          </NuxtLink>
         </div>
       </el-carousel-item>
     </el-carousel>
