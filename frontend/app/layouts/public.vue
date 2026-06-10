@@ -21,10 +21,8 @@
                       <el-dropdown-item>
                         <NuxtLink to="/articles" class="block w-full h-full">Articles</NuxtLink>
                         </el-dropdown-item>
-                      <el-dropdown-item>Action 2</el-dropdown-item>
-                      <el-dropdown-item>Action 3</el-dropdown-item>
-                      <el-dropdown-item>Action 4</el-dropdown-item>
-                      <el-dropdown-item>Action 5</el-dropdown-item>
+                      <el-dropdown-item>
+                        <NuxtLink to="/about" class="block w-full h-full">About Us</NuxtLink></el-dropdown-item>
                     </el-dropdown-menu>
                   </template>
                 </el-dropdown>
@@ -63,7 +61,7 @@
             <p class="text-white font-bold text-sm tracking-wider uppercase">Quick Links</p>
             <ul class="space-y-2 text-sm">
               <li><NuxtLink to="/services" class="hover:text-white transition-colors hover:underline underline-offset-4">Our Services</NuxtLink></li>
-              <li><NuxtLink to="/" class="hover:text-white transition-colors hover:underline underline-offset-4">About Us</NuxtLink></li>
+              <li><NuxtLink to="/about" class="hover:text-white transition-colors hover:underline underline-offset-4">About Us</NuxtLink></li>
               <li><NuxtLink to="/contact" class="hover:text-white transition-colors hover:underline underline-offset-4">Contact Support</NuxtLink></li>
               <li><a href="#" class="hover:text-white transition-colors hover:underline underline-offset-4">Privacy Policy</a></li>
             </ul>

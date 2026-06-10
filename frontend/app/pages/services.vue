@@ -1,4 +1,5 @@
 <template>
+  
   <div class="relative h-[500px] w-full overflow-hidden shadow-sm">
     <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?q=80&w=1632&auto=format&fit=crop" class="w-full h-full object-cover" />
     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/50 to-transparent flex flex-col justify-center items-center text-white text-center px-6">

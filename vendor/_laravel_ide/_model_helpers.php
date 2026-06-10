@@ -1336,6 +1336,7 @@ namespace App\Models {
     /**
      * App\Models\Article
      *
+     * @property string $status
      * @property int $views
      * @property string|null $author_id
      * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -1356,6 +1357,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<Article>|Article whereDeletedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Article>|Article whereAuthorId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Article>|Article whereViews($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Article>|Article whereStatus($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Article>|Article newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Article>|Article newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Article>|Article query()
