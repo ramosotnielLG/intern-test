@@ -186,4 +186,4 @@ const confirmDelete = async (article: Article) => {
 onMounted(() => {
   loadArticles()
 })
-</script>
+</script> 

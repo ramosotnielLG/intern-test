@@ -11,7 +11,7 @@
         <div class="flex items-center gap-6 md:gap-10">
           <nav>
             <ul class="flex gap-6 md:gap-8 font-semibold text-gray-600 text-sm md:text-base">
-              <li class="hover:text-gray-900 cursor-pointer transition-colors">SERVICES</li>
+              <li class="hover:text-gray-900 cursor-pointer transition-colors"><NuxtLink to="/services">SERVICES</NuxtLink></li>
               <li class="hover:text-gray-900 cursor-pointer transition-colors flex items-center">
                 <el-dropdown 
                 class="hover:text-gray-900 cursor-pointer transition-colors custom-nav-dropdown">
@@ -62,7 +62,7 @@
           <div class="space-y-3">
             <p class="text-white font-bold text-sm tracking-wider uppercase">Quick Links</p>
             <ul class="space-y-2 text-sm">
-              <li><a href="#" class="hover:text-white transition-colors hover:underline underline-offset-4">Our Services</a></li>
+              <li><NuxtLink to="/services" class="hover:text-white transition-colors hover:underline underline-offset-4">Our Services</NuxtLink></li>
               <li><NuxtLink to="/" class="hover:text-white transition-colors hover:underline underline-offset-4">About Us</NuxtLink></li>
               <li><NuxtLink to="/contact" class="hover:text-white transition-colors hover:underline underline-offset-4">Contact Support</NuxtLink></li>
               <li><a href="#" class="hover:text-white transition-colors hover:underline underline-offset-4">Privacy Policy</a></li>
