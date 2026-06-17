@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\HelloWorld;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
@@ -18,6 +19,9 @@ use App\Http\Controllers\ServiceScopeOfServiceController;
 use App\Http\Controllers\SiteSettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/v1/home-articles', [ArticleController::class, 'getHomeArticles']);
+Route::post('/v1/articles/upload-image', [ArticleController::class, 'uploadImage']);
 
 Route::get('/health', function () {
     return ['status' => 'ok'];

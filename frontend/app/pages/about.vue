@@ -2,7 +2,7 @@
   <div class="relative h-[400px] w-full overflow-hidden shadow-sm">
     <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1632&auto=format&fit=crop" class="w-full h-full object-cover" />
     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/50 to-transparent flex flex-col justify-center items-center text-white text-center px-6">
-      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-sm uppercase">Behind MEGAPACK</h1>
+      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-sm uppercase">Behind APA</h1>
       <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed font-light">
         We are a collective of digital craftsmen building future-proof experiences.
       </p>

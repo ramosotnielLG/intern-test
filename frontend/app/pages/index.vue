@@ -1,18 +1,21 @@
 <template>
   <div class="max-w-6xl mx-auto px-6 py-10">
     <el-carousel height="500px" class="rounded-3xl overflow-hidden shadow-lg">
-      <el-carousel-item v-for="(slide, index) in 3" :key="index" class="relative rounded-3xl overflow-hidden">
-        <img :src="`https://builder.pixfort.com/item/megapack/images/slider/slider-image-${index + 1}.jpg`" class="w-full h-full object-cover" />
-        
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent flex flex-col justify-center items-center text-white text-center px-6">
-          <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-sm">The Perfect Design</h1>
-          <p class="mt-4 text-lg md:text-xl text-gray-200 max-w-xl leading-relaxed">From logo design to website designs, we are ready.</p>
-          <NuxtLink to="/contact">
-          <button class="mt-8 bg-rose-800 hover:bg-rose-900 text-white px-8 py-3.5 rounded-xl font-bold transition-all duration-300 hover:shadow-lg hover:shadow-rose-700/30 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer">
-            Purchase MegaPack
-          </button>
-          </NuxtLink>
-        </div>
+      <el-carousel-item v-for="(slide, index) in slides" :key="index" class="relative rounded-3xl overflow-hidden">
+        <img :src="slide.image" class="w-full h-full object-cover" :alt="slide.title" />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-transparent flex flex-col justify-center items-center text-white text-center px-6">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-sm">
+              {{ slide.title }}
+            </h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-200 max-w-xl leading-relaxed">
+              {{ slide.description }}
+            </p>
+            <NuxtLink :to="slide.link">
+              <button class="mt-8 bg-rose-800 hover:bg-rose-900 text-white px-8 py-3.5 rounded-xl font-bold transition-all duration-300 hover:shadow-lg hover:shadow-rose-700/30 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer">
+                {{ slide.buttonText }}
+              </button>
+            </NuxtLink>
+          </div>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -111,7 +114,7 @@
   </div>
       
   <div class="max-w-3xl mx-auto text-center pt-20 pb-10 px-6">
-    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight">Gallery is Here!</h1>
+    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight">Our Portfolio is Here!</h1>
     <p class="text-slate-500 mt-4 leading-relaxed">This is just a simple text made for this unique and awesome template, you can replace it with any text.</p>
   </div>
 
@@ -159,6 +162,57 @@
         </el-collapse>
       </div>
     </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6 py-10">
+    <h2 class="text-2xl font-bold text-slate-800 mb-6">Artikel Terbaru</h2>
+
+    <div v-if="pending" class="text-slate-400">
+      Sedang memuat artikel...
+    </div>
+
+    <div v-else-if="error" class="text-rose-500">
+      Gagal mengambil data dari server: {{ error.message }}
+    </div>
+
+    <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div 
+    v-for="artikel in daftarArtikel" 
+    :key="artikel.slug" 
+    class="bg-white p-6 rounded-2xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.02)] flex flex-col justify-between"
+  >
+    <div>
+      <div class="w-full h-48 mb-4 overflow-hidden rounded-xl bg-slate-50">
+        <template v-if="artikel.thumbnail">
+          <div class="w-full h-48 mb-4 overflow-hidden rounded-xl bg-slate-50 flex items-center justify-center">
+            <img
+              v-if="artikel.thumbnail || getFirstImage(artikel.description)"
+              :src="artikel.thumbnail || getFirstImage(artikel.description)"
+              :alt="artikel.title"
+              class="w-full h-full object-cover"
+            />
+            <div v-else class="text-slate-400 text-sm">
+              No Thumbnail
+            </div>
+          </div> 
+        </template>
+        
+        <div v-else class="w-full h-full flex items-center justify-center text-slate-400 text-sm">
+          No Thumbnail
+        </div>
+      </div>
+
+      <h3 class="text-xl font-bold text-slate-800 mb-2">{{ artikel.title }}</h3>
+      
+      <p class="text-slate-500 text-sm mb-4 line-clamp-3" v-html="artikel.description">
+      </p>
+    </div>
+    
+    <NuxtLink :to="`/article/${artikel.slug}`" class="text-rose-800 font-semibold inline-flex items-center hover:underline mt-4 text-sm tracking-wide">
+      Baca Selengkapnya <span class="ml-1">&rarr;</span>
+    </NuxtLink>
+  </div>
+</div>
   </div>
 
   <div class="py-24 bg-white border-t border-gray-100">
@@ -228,6 +282,41 @@ definePageMeta({
   layout: 'public',
 })
 
+const slides = [
+  {
+    image: 'https://builder.pixfort.com/item/megapack/images/slider/slider-image-1.jpg',
+    title: 'The Perfect Design',
+    description: 'From logo design to website designs, we are ready.',
+    buttonText: 'Purchase MegaPack',
+    link: '/contact'
+  },
+  {
+    image: 'https://builder.pixfort.com/item/megapack/images/slider/slider-image-2.jpg',
+    title: 'Grow Your Business',
+    description: 'We help startups and brands scale with modern tech solution.',
+    buttonText: 'Our Services',
+    link: '/services'
+  },
+  {
+    image: 'https://builder.pixfort.com/item/megapack/images/slider/slider-image-3.jpg',
+    title: 'Creative Marketing',
+    description: 'Reach more customers with data-driven marketing strategies.',
+    buttonText: 'Learn More',
+    link: '/about'
+  }
+]
+
+interface Artikel {
+  id: number
+  title: string
+  slug: string
+  description: string | null
+  thumbnail: {
+    path?: string
+    url?: string
+  } | null
+}
+
 const form = reactive({
   name: '',
   email: '',
@@ -238,12 +327,12 @@ const selectedImage = ref<string>('')
 const activeName = ref('1')
 
 const images = [
-  'https://builder.pixfort.com/item/megapack/images/modern/gallery-image-1.jpg',
-  'https://builder.pixfort.com/item/megapack/images/modern/gallery-image-2.jpg',
-  'https://builder.pixfort.com/item/megapack/images/modern/gallery-image-3.jpg',
-  'https://builder.pixfort.com/item/megapack/images/modern/gallery-image-4.jpg',
-  'https://builder.pixfort.com/item/megapack/images/modern/gallery-image-5.jpg',
-  'https://builder.pixfort.com/item/megapack/images/modern/gallery-image-6.jpg',
+  'https://images.unsplash.com/photo-1508317469940-e3de49ba902e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://plus.unsplash.com/premium_photo-1714618828448-abf8732500c6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDMyfHx8ZW58MHx8fHx8',
+  'https://images.unsplash.com/photo-1707836868495-3307d371aba4?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1690192699379-fb68bb749eaa?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1594892185343-0241e1d47d15?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 ]
 
 function openImage(img: string): void {
@@ -256,7 +345,6 @@ function closeImage() {
 }
 
 const formRef = ref<FormInstance>()
-
 const isSubmitting = ref(false)
 const isSubmitted = ref(false)
 
@@ -297,7 +385,41 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
   })
 }
 
+const { data: daftarArtikel, pending, error } = await useFetch<any>('http://localhost:8000/api/v1/home-articles', {
+  transform: (response) => {
+    const articlesArray = Array.isArray(response) ? response : (response.data || response.articles || []);
+    
+    return articlesArray.map((item: any) => ({
+      id: item.id,
+      title: item.title,
+      slug: item.slug,
+      description: item.description ?? null,
+      thumbnail: item.thumbnail?.path || item.thumbnail?.url || item.thumbnail || null
+    }));
+    console.log(daftarArtikel.value)
+  }
+});
 
+// Fungsi untuk mengekstrak URL gambar pertama dari teks HTML deskripsi
+function getFirstImage(htmlString: string | null): string | undefined {
+  if (!htmlString) return undefined;
+  
+  // Mencari tag <img src="...">
+  const regex = /<img[^>]+src=["']([^"']+)["']/i;
+  const match = htmlString.match(regex);
+  
+  if (match && match[1]) {
+    const imageUrl = match[1];
+    
+    // Jika gambarnya adalah blob lama yang rusak, kita abaikan saja agar berubah jadi 'No Thumbnail'
+    if (imageUrl.startsWith('blob:')) {
+      return undefined; 
+    }
+    
+    return imageUrl;
+  }
+  return undefined;
+}
 </script>
 
 <style scoped>

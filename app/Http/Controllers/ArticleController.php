@@ -84,6 +84,27 @@ class ArticleController extends Controller
         }
     }
 
+    public function uploadImage(Request $request)
+    {
+        if ($request->hasFile('UploadFiles')) {
+            $file = $request->file('UploadFiles');
+            
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('uploads', $fileName, 'public');
+            $url = asset('storage/' . $path);
+
+            return response()->json([
+                'link' => $url,
+                'name' => $fileName,
+                'status' => 'success'
+            ], 200);
+        }
+
+        return response()->json([
+            'status' => 'fail',
+            'message' => 'File tidak ditemukan'
+        ], 400);
+    }
     /**
      * Display the specified resource.
      */
@@ -128,6 +149,16 @@ class ArticleController extends Controller
             return response()->json(['message' => 'Failed to update article', 'error' => $e->getMessage()], 500);
         }
     }
+
+    public function getHomeArticles()
+{
+    $articles = Article::with(['thumbnail', 'author'])
+        ->latest()
+        ->take(3)
+        ->get();
+
+    return response()->json($articles);
+}
 
     /**
      * Remove the specified resource from storage.

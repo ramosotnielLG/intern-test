@@ -4,7 +4,7 @@
       <div class="flex justify-between items-center py-6 max-w-7xl mx-auto px-6 md:px-12">
         <div class="flex items-center">
           <p class="font-extrabold text-gray-800 tracking-wider text-2xl md:text-3xl">
-            <NuxtLink to="/">MEGAPACK</NuxtLink>
+            <NuxtLink to="/">APA</NuxtLink>
           </p>
         </div>
 
@@ -12,21 +12,8 @@
           <nav>
             <ul class="flex gap-6 md:gap-8 font-semibold text-gray-600 text-sm md:text-base">
               <li class="hover:text-gray-900 cursor-pointer transition-colors"><NuxtLink to="/services">SERVICES</NuxtLink></li>
-              <li class="hover:text-gray-900 cursor-pointer transition-colors flex items-center">
-                <el-dropdown 
-                class="hover:text-gray-900 cursor-pointer transition-colors custom-nav-dropdown">
-                  <span class="el-dropdown-link">DROPDOWN</span>
-                  <template #dropdown>
-                    <el-dropdown-menu>
-                      <el-dropdown-item>
-                        <NuxtLink to="/articles" class="block w-full h-full">Articles</NuxtLink>
-                        </el-dropdown-item>
-                      <el-dropdown-item>
-                        <NuxtLink to="/about" class="block w-full h-full">About Us</NuxtLink></el-dropdown-item>
-                    </el-dropdown-menu>
-                  </template>
-                </el-dropdown>
-              </li>
+              <li class="hover:text-gray-900 cursor-pointer transition-colors flex items-center"><NuxtLink to="/articles" class="block w-full h-full">ARTICLES</NuxtLink></li>
+              <li class="hover:text-gray-900 cursor-pointer transition-colors flex items-center"><NuxtLink to="/about" class="block w-full h-full">ABOUT US</NuxtLink></li>
               <li class="hover:text-gray-900 cursor-pointer transition-colors"><NuxtLink to="/contact">CONTACT</NuxtLink></li>
             </ul>
           </nav>
@@ -71,7 +58,7 @@
             <p class="text-white font-bold text-sm tracking-wider uppercase">Contact Us</p>
             <ul class="space-y-2 text-sm">
               <li>📍 Jakarta, Indonesia</li>
-              <li>✉️ info@megapack.co.id</li>
+              <li>✉️ info@apa.co.id</li>
               <li>📞 +62 21 1234 5678</li>
             </ul>
           </div>
@@ -79,7 +66,7 @@
         </div>
 
         <div class="flex flex-col sm:flex-row justify-between items-center pt-8 text-xs text-gray-500 gap-4">
-          <p>&copy; 2026 MEGAPACK. All rights reserved.</p>
+          <p>&copy; 2026 APA. All rights reserved.</p>
           <p>Designed for professional industrial inquiry systems.</p>
         </div>
       </div>
@@ -88,20 +75,7 @@
 </template>
 
 <style scoped>
-:deep(.custom-nav-dropdown) {
-  color: inherit !important;
-  font-size: inherit !important;
-  font-weight: inherit !important;
-  letter-spacing: inherit !important;
-  transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
 :deep(.el-tooltip__trigger:focus-visible) {
   outline: none !important;
-}
-
-.block-col-2 .el-dropdown-link {
-  display: flex;
-  align-items: center;
 }
 </style>

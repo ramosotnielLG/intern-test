@@ -1,32 +1,38 @@
 <template>
-  <!-- Hero Section -->
-  <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 px-6 text-center">
-    <p class="text-xs font-bold uppercase tracking-[0.35em] text-rose-400 mb-3">Blog & Insights</p>
-    <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight">Artikel Terbaru</h1>
-    <p class="mt-4 text-slate-400 max-w-xl mx-auto text-base leading-relaxed">
-      Temukan wawasan, tips, dan berita terkini dari tim kami.
-    </p>
-
-    <!-- Search -->
-    <div class="mt-8 max-w-md mx-auto">
-      <el-input
-        v-model="searchQuery"
-        placeholder="Cari artikel..."
-        clearable
-        size="large"
-        class="rounded-xl"
-      >
-        <template #prefix>
-          <Icon icon="solar:magnifer-linear" class="text-slate-400" />
-        </template>
-      </el-input>
+<div class="relative h-[400px] w-full overflow-hidden shadow-sm flex items-center justify-center">
+  <img 
+    src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=1170&auto=format&fit=crop" 
+    class="absolute inset-0 w-full h-full object-cover" 
+    alt="Artikel Terbaru Background"
+  />
+  <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/50 to-transparent flex flex-col justify-center items-center text-white text-center px-6">
+    <div class="w-full max-w-2xl mx-auto">
+      <p class="text-xs font-bold uppercase tracking-[0.35em] text-rose-400 mb-3">Blog & Insights</p>
+      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-sm uppercase">
+        Artikel Terbaru
+      </h1>
+      <p class="mt-4 text-base md:text-lg text-gray-300 leading-relaxed font-light">
+        Temukan wawasan, tips, dan berita terkini dari tim kami.
+      </p>
+      <div class="mt-8 max-w-md mx-auto">
+        <el-input
+          v-model="searchQuery"
+          placeholder="Cari artikel..."
+          clearable
+          size="large"
+          class="rounded-xl shadow-md text-slate-800"
+        >
+          <template #prefix>
+            <Icon icon="solar:magnifer-linear" class="text-slate-400" />
+          </template>
+        </el-input>
+      </div>
     </div>
   </div>
+</div>
 
-  <!-- Grid -->
   <div class="max-w-6xl mx-auto px-6 py-16">
 
-    <!-- Loading Skeleton -->
     <div v-if="loading" class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
       <div v-for="i in 6" :key="i" class="rounded-2xl border border-gray-100 overflow-hidden">
         <div class="h-48 bg-slate-100 animate-pulse" />
@@ -38,8 +44,7 @@
       </div>
     </div>
 
-    <!-- Empty State -->
-    <div v-else-if="filteredArticles.length === 0" class="text-center py-24">
+    <div v-else-if="articles.length === 0" class="text-center py-24">
       <div class="inline-flex p-5 bg-rose-50 rounded-2xl mb-4">
         <Icon icon="solar:document-text-outline" class="text-4xl text-rose-300" />
       </div>
@@ -53,15 +58,13 @@
       </button>
     </div>
 
-    <!-- Article Cards -->
     <div v-else class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
       <NuxtLink
-        v-for="article in paginatedArticles"
+        v-for="article in articles"
         :key="article.id"
         :to="`/article/${article.slug}`"
         class="group block rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 bg-white no-underline"
       >
-        <!-- Thumbnail -->
         <div class="relative h-48 bg-slate-100 overflow-hidden">
           <img
             v-if="article.thumbnail"
@@ -74,7 +77,6 @@
           </div>
         </div>
 
-        <!-- Content -->
         <div class="p-5">
           <div class="flex items-center gap-2 mb-3 text-xs text-slate-400">
             <Icon icon="solar:user-outline" class="text-sm" />
@@ -97,12 +99,11 @@
       </NuxtLink>
     </div>
 
-    <!-- Pagination -->
-    <div v-if="!loading && filteredArticles.length > pageSize" class="mt-12 flex justify-center">
+    <div v-if="!loading && totalArticles > pageSize" class="mt-12 flex justify-center">
       <el-pagination
         v-model:current-page="currentPage"
         :page-size="pageSize"
-        :total="filteredArticles.length"
+        :total="totalArticles"
         layout="prev, pager, next"
         background
         @change="scrollToTop"
@@ -113,7 +114,7 @@
 
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue'
-import { computed, onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 definePageMeta({
   layout: 'public',
@@ -133,7 +134,10 @@ const articles = ref<PublicArticle[]>([])
 const loading = ref(true)
 const searchQuery = ref('')
 const currentPage = ref(1)
+const totalArticles = ref(0)
 const pageSize = 9
+
+let searchTimeout: ReturnType<typeof setTimeout> | null = null
 
 const stripHtml = (html: string | null): string => {
   if (!html) return ''
@@ -145,36 +149,19 @@ const mapThumbnail = (thumbnail: any): string | null => {
   return thumbnail.path ?? thumbnail.url ?? null
 }
 
-const filteredArticles = computed(() => {
-  if (!searchQuery.value.trim()) return articles.value
-  const q = searchQuery.value.toLowerCase()
-  return articles.value.filter(
-    (a) =>
-      a.title.toLowerCase().includes(q) ||
-      (a.description ?? '').toLowerCase().includes(q) ||
-      (a.author ?? '').toLowerCase().includes(q),
-  )
-})
-
-const paginatedArticles = computed(() => {
-  const start = (currentPage.value - 1) * pageSize
-  return filteredArticles.value.slice(start, start + pageSize)
-})
-
-watch(searchQuery, () => {
-  currentPage.value = 1
-})
-
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
-onMounted(async () => {
+const fetchArticles = async () => {
+  loading.value = true
   try {
     const config = useRuntimeConfig()
     const apiBase = config.public.apiBase.replace(/\/$/, '')
-    const response = await $fetch<any>(`${apiBase}/api/public/articles`)
-    const data = Array.isArray(response) ? response : (response as any).data ?? []
+    const response = await $fetch<any>(`${apiBase}/api/public/articles`, {
+      query: {
+        page: currentPage.value,
+        limit: pageSize,
+        ...(searchQuery.value ? { search: searchQuery.value } : {}),
+      },
+    })
+    const data = Array.isArray(response) ? response : response.data ?? []
     articles.value = data.map((a: any) => ({
       id: a.id,
       title: a.title,
@@ -184,12 +171,27 @@ onMounted(async () => {
       thumbnail: mapThumbnail(a.thumbnail),
       views: a.views ?? 0,
     }))
+    totalArticles.value = response.total ?? data.length
   } catch (error) {
     console.error('Gagal memuat artikel:', error)
   } finally {
     loading.value = false
   }
+}
+
+watch(currentPage, fetchArticles)
+
+watch(searchQuery, () => {
+  currentPage.value = 1
+  if (searchTimeout) clearTimeout(searchTimeout)
+  searchTimeout = setTimeout(fetchArticles, 400)
 })
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+onMounted(fetchArticles)
 </script>
 
 <style scoped>

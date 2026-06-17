@@ -4,7 +4,7 @@
     <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?q=80&w=1632&auto=format&fit=crop" class="w-full h-full object-cover" />
     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/50 to-transparent flex flex-col justify-center items-center text-white text-center px-6">
       <h1 class="text-4xl md:text-7xl font-extrabold tracking-tight drop-shadow-md uppercase">Our Services & Portfolio</h1>
-      <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed font-light">From logo design to website designs, we are professionally tailored in MEGAPACK.</p>
+      <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed font-light">From logo design to website designs, we are professionally tailored in APA.</p>
     </div>
   </div>
 
@@ -128,10 +128,10 @@ const showImage = ref<boolean>(false)
 const selectedImage = ref<string>('')
 
 const showcaseImages = [
-  'https://builder.pixfort.com/item/megapack/images/modern/gallery-image-1.jpg',
-  'https://builder.pixfort.com/item/megapack/images/modern/gallery-image-2.jpg',
-  'https://builder.pixfort.com/item/megapack/images/modern/gallery-image-3.jpg',
-  'https://builder.pixfort.com/item/megapack/images/modern/gallery-image-4.jpg'
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Uy-_7TFIMbQVEEsccjpbkl5rLgmy93mq1A&s',
+  'https://i.scdn.co/image/ab67616d0000b27374f5c79d11cfee31a3ee2100',
+  'https://upload.wikimedia.org/wikipedia/en/thumb/f/f0/Meshuggah-Chaosphere.jpg/250px-Meshuggah-Chaosphere.jpg',
+  'https://upload.wikimedia.org/wikipedia/en/e/ed/Meshuggah-Nothing.jpg'
 ]
 
 function openImage(img: string): void {
