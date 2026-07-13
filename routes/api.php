@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\HelloWorld;
+use App\Http\Controllers\Admin\ArticleDocxController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\AuthController;
@@ -26,6 +27,8 @@ Route::post('/v1/articles/upload-image', [ArticleController::class, 'uploadImage
 Route::get('/health', function () {
     return ['status' => 'ok'];
 });
+
+Route::middleware('auth:sanctum')->post('/admin/articles/convert-docx', [ArticleDocxController::class, 'convert']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/writer/dashboard', [DashboardController::class, 'writerDashboard']);

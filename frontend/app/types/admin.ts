@@ -91,6 +91,7 @@ export interface ArticleApi {
   id: string
   title: string
   slug: string
+  status: 'draft' | 'published'
   author: { id: string, name: string } | null
   description: string | null
   thumbnail: AttachmentApi | null
@@ -100,6 +101,7 @@ export interface Article {
   id: string
   title: string
   slug: string
+  status: 'draft' | 'published'
   description: string | null
   author: User | null
   thumbnail: UploadUserFile | null

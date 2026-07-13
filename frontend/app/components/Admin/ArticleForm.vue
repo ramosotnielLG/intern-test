@@ -18,11 +18,18 @@
 
         <el-form-item label="Description" prop="description">
           <client-only>
+            <AdminDocxUploadButton
+              :upload-url="`${apiBase}/api/admin/articles/convert-docx`"
+              :xsrf-token="getXsrfToken() || ''"
+              @converted="handleDocxConverted"
+            /> 
+
             <AdminAppRichTextEditor
               v-model="form.description"
               :upload-url="`${apiBase}/api/articles/upload-image`"
               :xsrf-token="getXsrfToken() || ''"
             />
+
             <template #fallback>
               <div class="h-64 flex items-center justify-center bg-gray-50 border border-gray-200 rounded">
                 <el-icon class="is-loading text-2xl text-gray-400"><Loading /></el-icon>
@@ -106,6 +113,9 @@ const rules = reactive<FormRules>({
   ],
 })
 
+function handleDocxConverted(html: string) {
+  form.value.description = html
+}
 
 const handleThumbnailChange = (uploadFile: UploadFile) => {
   thumbnailFiles.value = [uploadFile]

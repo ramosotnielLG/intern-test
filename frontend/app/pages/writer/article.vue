@@ -146,7 +146,7 @@ const mapArticle = (article: ArticleApi): Article & { is_mine: boolean } => ({
   id: article.id,
   title: article.title,
   slug: article.slug,
-  status: (article as any).status ?? 'draft',
+  status: article.status ?? 'draft',
   author: article.author ? { id: article.author.id, name: article.author.name } as any : null,
   description: article.description,
   thumbnail: mapAttachment(article.thumbnail),

@@ -88,7 +88,6 @@ import type { Service, ServiceScope } from '~/types/admin'
 import { useApi } from '~/composables/useApi'
 import { registerLicense } from '@syncfusion/ej2-base'
 
-
 const props = defineProps<{
   serviceId?: string
 }>()

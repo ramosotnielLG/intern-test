@@ -10,8 +10,13 @@
 
   <div class="w-full bg-white py-16 px-4 md:px-12">
     <div class="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      
+
       <div class="lg:col-span-4 space-y-8 py-4">
+        <div class="mb-2">
+          <h2 class="text-3xl font-black text-slate-800 tracking-tight">Apa yang Kami Tawarkan</h2>
+          <p class="text-slate-500 text-sm mt-2 leading-relaxed">Layanan end-to-end dari konsep hingga eksekusi, dirancang untuk kebutuhan brand Anda.</p>
+        </div>
+
         <div class="flex gap-4 items-start group">
           <div class="p-3 bg-slate-50 rounded-xl border border-gray-100 group-hover:bg-rose-50 transition-colors">
             <svg class="w-6 h-6 text-rose-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -101,13 +106,28 @@
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div v-for="(img, idx) in showcaseImages" :key="idx" class="overflow-hidden rounded-2xl bg-white shadow-sm border border-gray-100 relative group aspect-square">
-          <img :src="img" class="cursor-pointer w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" @click="openImage(img)">
-          <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-            <span class="text-white text-xs font-bold tracking-wider bg-rose-800/90 px-3 py-1.5 rounded-lg shadow-sm">VIEW PROJECT</span>
-          </div>
+        <div v-for="(item, idx) in showcaseItems" :key="idx" class="overflow-hidden rounded-2xl bg-white shadow-sm border border-gray-100 relative group aspect-square">
+          <img :src="item.image" class="cursor-pointer w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" @click="openImage(item.image)">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 pointer-events-none">
+              <span class="text-rose-300 text-[10px] font-bold uppercase tracking-wider mb-1">{{ item.category }}</span>
+              <span class="text-white text-sm font-bold leading-tight">{{ item.title }}</span>
+            </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="w-full bg-slate-950 py-20 px-6">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight">Punya proyek yang ingin diwujudkan?</h2>
+      <p class="text-gray-400 text-sm md:text-base mt-4 max-w-xl mx-auto leading-relaxed">
+        Mari diskusikan kebutuhan Anda dan lihat bagaimana kami bisa membantu membangun identitas brand yang kuat.
+      </p>
+      <NuxtLink to="/contact">
+        <button class="mt-8 bg-rose-800 text-white font-bold text-sm px-8 py-4 rounded-xl hover:bg-rose-900 shadow-md transition-all cursor-pointer">
+          MULAI PROYEK ANDA
+        </button>
+      </NuxtLink>
     </div>
   </div>
 
@@ -127,11 +147,11 @@ definePageMeta({
 const showImage = ref<boolean>(false)
 const selectedImage = ref<string>('')
 
-const showcaseImages = [
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Uy-_7TFIMbQVEEsccjpbkl5rLgmy93mq1A&s',
-  'https://i.scdn.co/image/ab67616d0000b27374f5c79d11cfee31a3ee2100',
-  'https://upload.wikimedia.org/wikipedia/en/thumb/f/f0/Meshuggah-Chaosphere.jpg/250px-Meshuggah-Chaosphere.jpg',
-  'https://upload.wikimedia.org/wikipedia/en/e/ed/Meshuggah-Nothing.jpg'
+const showcaseItems = [
+  { image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Uy-_7TFIMbQVEEsccjpbkl5rLgmy93mq1A&s', title: 'Nama Proyek 1', category: 'Branding' },
+  { image: 'https://i.scdn.co/image/ab67616d0000b27374f5c79d11cfee31a3ee2100', title: 'Nama Proyek 2', category: 'Album Art' },
+  { image: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/f0/Meshuggah-Chaosphere.jpg/250px-Meshuggah-Chaosphere.jpg', title: 'Nama Proyek 3', category: 'Web Design' },
+  { image: 'https://upload.wikimedia.org/wikipedia/en/e/ed/Meshuggah-Nothing.jpg', title: 'Nama Proyek 4', category: 'Development' },
 ]
 
 function openImage(img: string): void {

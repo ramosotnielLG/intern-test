@@ -76,6 +76,9 @@ const onImageUploadSuccess = (args: any) => {
   console.log('response:', args.e.currentTarget.response)
   try {
     const response = JSON.parse(args.e.currentTarget.response)
+    if (response?.link) {
+      args.file.name = response.link
+    }
     console.log('parsed response:', response)
     console.log('url:', response.url)
   } catch (e) {

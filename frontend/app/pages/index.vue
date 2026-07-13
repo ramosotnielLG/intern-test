@@ -396,11 +396,10 @@ const { data: daftarArtikel, pending, error } = await useFetch<any>('http://loca
       description: item.description ?? null,
       thumbnail: item.thumbnail?.path || item.thumbnail?.url || item.thumbnail || null
     }));
-    console.log(daftarArtikel.value)
   }
 });
 
-// Fungsi untuk mengekstrak URL gambar pertama dari teks HTML deskripsi
+// Fungsi untuk mengekstrak URL gambar pertama dari teks HTML deskripsi5
 function getFirstImage(htmlString: string | null): string | undefined {
   if (!htmlString) return undefined;
   
