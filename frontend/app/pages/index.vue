@@ -107,7 +107,7 @@
       </div>
 
       <div class="flex justify-center">
-        <img src="https://builder.pixfort.com/item/megapack/images/modern/modern-image-1.png" class="max-w-full drop-shadow-xl transform hover:scale-[1.02] transition duration-500">
+        <img src="https://png.pngtree.com/png-vector/20241203/ourmid/pngtree-mobile-phone-frame-photo-png-image_14568670.png" class="max-w-full drop-shadow-xl transform hover:scale-[1.02] transition duration-500">
       </div>
 
     </div>
@@ -284,21 +284,21 @@ definePageMeta({
 
 const slides = [
   {
-    image: 'https://builder.pixfort.com/item/megapack/images/slider/slider-image-1.jpg',
+    image: 'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'The Perfect Design',
     description: 'From logo design to website designs, we are ready.',
     buttonText: 'Purchase MegaPack',
     link: '/contact'
   },
   {
-    image: 'https://builder.pixfort.com/item/megapack/images/slider/slider-image-2.jpg',
+    image: 'https://images.unsplash.com/photo-1587440871875-191322ee64b0?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'Grow Your Business',
     description: 'We help startups and brands scale with modern tech solution.',
     buttonText: 'Our Services',
     link: '/services'
   },
   {
-    image: 'https://builder.pixfort.com/item/megapack/images/slider/slider-image-3.jpg',
+    image: 'https://images.unsplash.com/photo-1602576666092-bf6447a729fc?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'Creative Marketing',
     description: 'Reach more customers with data-driven marketing strategies.',
     buttonText: 'Learn More',

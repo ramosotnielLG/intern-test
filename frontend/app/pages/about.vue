@@ -73,7 +73,7 @@
           <div class="text-xs md:text-sm text-gray-400 mt-1 uppercase tracking-wider font-medium">Years Active</div>
         </div>
       </div>
-
+      
       <div class="space-y-10">
         <div class="text-center max-w-2xl mx-auto">
           <h2 class="text-3xl font-black text-slate-800 tracking-tight">Apa Kata Klien Kami</h2>
